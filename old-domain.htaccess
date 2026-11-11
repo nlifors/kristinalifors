@@ -1,0 +1,6 @@
+# Put this on the OLD domain (kristinalifors.eu) once kristinalifors.se is live.
+# Every old address redirects permanently to the same path on the new domain,
+# so search rankings and existing links (Instagram, Pinterest, press) carry over.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www\.)?kristinalifors\.eu$ [NC]
+RewriteRule ^(.*)$ https://www.kristinalifors.se/$1 [R=301,L]
