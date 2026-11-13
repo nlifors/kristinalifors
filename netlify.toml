@@ -1,0 +1,4 @@
+# Netlify publishes a clean copy of the site in dist/, leaving out repo-only files.
+[build]
+  publish = "dist"
+  command = "mkdir -p dist && tar --exclude=dist --exclude=.git --exclude=.github --exclude=.gitignore --exclude=netlify.toml --exclude=README.md --exclude='download-images.*' --exclude=old-domain.htaccess --exclude=manifest.csv --exclude=.DS_Store --exclude=.netlify -cf - . | tar -xf - -C dist"
