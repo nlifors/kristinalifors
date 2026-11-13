@@ -62,13 +62,13 @@
     lb.addEventListener("touchend",function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)show(n+(d<0?1:-1));tx=null});
   }
 
-  // Contact form: no server needed - opens the visitor's mail program with the message filled in.
-  // To send without a mail program, point the form at a form service or your host's mail script instead (see README).
+  // Contact form: sent in the background to Netlify Forms (submissions appear in the Netlify dashboard and are e-mailed on).
   var f=document.querySelector(".contact-form");
-  if(f)f.addEventListener("submit",function(e){e.preventDefault();var note=f.querySelector(".form-note");
+  if(f)f.addEventListener("submit",function(e){e.preventDefault();var note=f.querySelector(".form-note"),btn=f.querySelector("button[type=submit]");
     if(!f.checkValidity()){note.textContent="Please fill in your name, a valid e-mail address and a message.";f.reportValidity();return;}
-    var d=new FormData(f),to="klifors"+"@"+"gmail.com",
-        body=d.get("message")+"\n\n"+d.get("name")+"\n"+d.get("email")+(d.get("phone")?"\n"+d.get("phone"):"");
-    location.href="mailto:"+to+"?subject="+encodeURIComponent("Enquiry from "+d.get("name"))+"&body="+encodeURIComponent(body);
-    note.textContent="Your e-mail program should now open with the message ready to send.";});
+    btn.disabled=true;note.textContent="Sending…";
+    fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(new FormData(f)).toString()})
+      .then(function(r){if(!r.ok)throw new Error(r.status);f.reset();note.textContent="Thank you! Your message has been sent. We'll be in touch soon.";})
+      .catch(function(){note.textContent="Sorry, the message could not be sent. Please e-mail us at "+"klifors"+"@"+"gmail.com"+" instead.";})
+      .then(function(){btn.disabled=false;});});
 })();

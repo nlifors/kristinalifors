@@ -20,9 +20,8 @@ To copy all 171 images into this folder, run one of these from the site folder:
 
 ## Before going live
 1. Run the image download and check the count it prints (171).
-2. Contact form: it currently opens the visitor's e-mail program with the message filled in.
-   For a form that sends by itself, point it at your host's form handler or a form service
-   (see the comment at the bottom of `assets/site.js`).
+2. Contact form: it sends through Netlify Forms. Messages appear under Forms in the Netlify
+   dashboard and are e-mailed to the addresses set under Form submission notifications there.
 3. Upload everything to the kristinalifors.se web root. The host must serve `index.html` for
    folder addresses (every normal host does). `404.html` is the not-found page.
 4. Put `old-domain.htaccess` (renamed `.htaccess`) on the kristinalifors.eu hosting so old

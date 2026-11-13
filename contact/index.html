@@ -43,7 +43,9 @@
     <p><a href="tel:+46705548614">+46 (0) 70 554 8614</a><br>
     <a class="js-email" data-u="klifors" data-d="gmail.com" href="#form">E-mail</a><noscript> (please activate JavaScript to see the e-mail)</noscript></p>
     <h2 id="form">Get in touch with us!</h2>
-    <form class="contact-form" novalidate>
+    <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="contact">
+      <p hidden><label>Leave this field empty<input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <label>Name<input name="name" autocomplete="name" required></label>
       <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
       <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
